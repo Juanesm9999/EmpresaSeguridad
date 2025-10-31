@@ -10,7 +10,7 @@ public class Empresa {
     private List<AgendaItem> listItems;
     private List<Empleado> listEmpleados;
     private List<ServicioSeguridad> listServiciosSeguridad;
-    private List<Equipo> listEquipos;
+    private List<Empleado> listEquipos;
     
     public Empresa(String nombre, String nit) {
         this.nombre = nombre;
@@ -62,7 +62,7 @@ public class Empresa {
 
     //--------------------------------------------- EQUIPO --------------------------------------------------------
 
-    public boolean agregarEquipo(Equipo equipo) {
+    public boolean agregarEquipo(Empleado equipo) {
         boolean centinela = false;
         if (!verificarEquipo(equipo.getId())) {
             listEquipos.add(equipo);
@@ -73,7 +73,7 @@ public class Empresa {
 
     public boolean verificarEquipo(String id) {
         boolean centinela = false;
-        for (Equipo equipo : listEquipos) {
+        for (Empleado equipo : listEquipos) {
             if (equipo.getId().equals(id)) {
                 centinela = true;
             }
@@ -84,7 +84,7 @@ public class Empresa {
 
     public boolean eliminarEquipo(String id){
         boolean centinela = false;
-        for (Equipo equipo: listEquipos) {
+        for (Empleado equipo: listEquipos) {
             if (equipo.getId().equals(id)) {
                 // CORREGIDO: debe eliminar de listConsultas, NO de listMascotas
                 listEquipos.remove(equipo);
@@ -122,36 +122,87 @@ public class Empresa {
         return centinela;
     }
 
-    public boolean agregarSupervisor(Empleado supervisor) {
+    public boolean registrarSupervisor(Empleado supervisor) {
         boolean centinela = false;
         if (!verificarSupervisor(supervisor.getId())) {
-            listEquipos.add(supervisor);
+            listEmpleados.add(supervisor);
             centinela = true;
         }
         return centinela;
     }
 
-    
-
-    public boolean registrarOperador(OperadorMonitoreo operador) {
-        return false;
+    public boolean verificarSupervisor(String id) {
+        boolean centinela = false;
+        for (Empleado supervisor : listEmpleados) {
+            if (supervisor.getId().equals(id)) {
+                centinela = true;
+            }
+        }
+        return centinela;
     }
+
+    public boolean registrarOperador (Empleado operador) {
+        boolean centinela = false;
+        if (!verificarOperador(operador.getId())) {
+            listEmpleados.add(operador);
+            centinela = true;
+        }
+        return centinela;
+    }
+
+    public boolean verificarOperador(String id) {
+        boolean centinela = false;
+        for (Empleado operador : listEmpleados) {
+            if (operador.getId().equals(id)) {
+                centinela = true;
+            }
+        }
+        return centinela;
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------
 
     public List<Vigilante> listarVigilantes() {
-        return null;
-    }
+        List<Vigilante> vigilantes = new ArrayList<>();
 
-    public List<Supervisor> listarSupervisores() {
-        return null;
+        for (Empleado empleado : listEmpleados) {
+            if (empleado instanceof Vigilante) {
+                vigilantes.add((Vigilante) empleado);
+            }
+        }
+
+        return vigilantes;
     }
 
     public List<OperadorMonitoreo> listarOperadores() {
-        return null;
+        List<OperadorMonitoreo> operadores = new ArrayList<>();
+
+        for (Empleado empleado : listEmpleados) {
+            if (empleado instanceof OperadorMonitoreo) {
+                operadores.add((OperadorMonitoreo) empleado);
+            }
+        }
+
+        return operadores;
     }
 
-    public  List<Empleado> listarTodosEmpleados(){
-        return null;
+    public List<Supervisor> listarSupervisores() {
+        List<Supervisor> supervisores = new ArrayList<>();
+
+        for (Empleado empleado : listEmpleados) {
+            if (empleado instanceof Supervisor) {
+                supervisores.add((Supervisor) empleado);
+            }
+        }
+
+        return supervisores;
     }
+
+    public List<Empleado> listarTodosEmpleados() {
+        return new ArrayList<>(listEmpleados);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------
 
     public void asignarPersonalAServicio(ServicioSeguridad servicio, Empleado empleado){
 
