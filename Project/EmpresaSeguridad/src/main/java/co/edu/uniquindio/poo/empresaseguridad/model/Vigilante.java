@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.empresaseguridad.model;
 
+import javafx.beans.value.ObservableValue;
+
 public class Vigilante extends Empleado {
     private String numeroPuesto;
     private TipoArma tipoArma;
@@ -16,6 +18,16 @@ public class Vigilante extends Empleado {
     public double calcularSalarioTotal() {
         double valorHoraExtra = getSalarioBase() / 240 * 1.5;
         return getSalarioBase() + (getHorasExtras() * valorHoraExtra);
+    }
+
+    @Override
+    public ObservableValue<String> turno() {
+        return null;
+    }
+
+    @Override
+    public ObservableValue<String> documento() {
+        return null;
     }
 
     // Getters y Setters

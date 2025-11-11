@@ -24,7 +24,7 @@ public class App extends Application {
 
     public void openViewPrincipal() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/ViewPrincipal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewPrincipal.fxml"));
             Parent root = loader.load();
 
             ViewPrincipalController controller = loader.getController();
@@ -41,7 +41,7 @@ public class App extends Application {
 
     public void openVigilanteView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/VigilanteView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("VigilanteView.fxml"));
             Parent root = loader.load();
 
             VigilanteViewController controller = loader.getController();
@@ -58,7 +58,7 @@ public class App extends Application {
 
     public void openSupervisorView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/SupervisorView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SupervisorView.fxml"));
             Parent root = loader.load();
 
             SupervisorViewController controller = loader.getController();
@@ -75,7 +75,7 @@ public class App extends Application {
 
     public void openOperadorView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/OperadorMonitoreoView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OperadorMonitoreoView.fxml"));
             Parent root = loader.load();
 
             OperadorMonitoreoViewController controller = loader.getController();
@@ -92,7 +92,7 @@ public class App extends Application {
 
     public void openServicioView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/ServicioView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ServicioView.fxml"));
             Parent root = loader.load();
 
             ServicioViewController controller = loader.getController();
@@ -109,7 +109,7 @@ public class App extends Application {
 
     public void openEquipoView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/EquipoView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EquipoView.fxml"));
             Parent root = loader.load();
 
             EquipoViewController controller = loader.getController();
@@ -126,7 +126,7 @@ public class App extends Application {
 
     public void openReportesView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/ReportesView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportesView.fxml"));
             Parent root = loader.load();
 
             ReportesViewController controller = loader.getController();
@@ -143,7 +143,7 @@ public class App extends Application {
 
     public void openAsignarPersonalView(ServicioSeguridad servicio) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/AsignarPersonalView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AsignarPersonalView.fxml"));
             Parent root = loader.load();
 
             AsignarPersonalViewController controller = loader.getController();
@@ -161,7 +161,7 @@ public class App extends Application {
 
     public void openAsignarEquipoView(ServicioSeguridad servicio) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/empresaseguridad/view/AsignarEquipoView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AsignarEquipoView.fxml"));
             Parent root = loader.load();
 
             AsignarEquipoViewController controller = loader.getController();

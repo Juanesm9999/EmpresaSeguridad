@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.empresaseguridad.model;
 
+import javafx.beans.value.ObservableValue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,4 +51,16 @@ public abstract class Empleado {
     public double getHorasExtras() { return horasExtras; }
     public void setHorasExtras(double horasExtras) { this.horasExtras = horasExtras; }
     public List<Equipo> getEquiposAsignados() { return equiposAsignados; }
+
+    public void setEquiposAsignados(List<Equipo> equiposAsignados) {
+        this.equiposAsignados = equiposAsignados;
+    }
+
+    public abstract ObservableValue<String> turno();
+
+    public abstract ObservableValue<String> documento();
+
+    public ObservableValue<String> nombre() {
+        return null;
+    }
 }

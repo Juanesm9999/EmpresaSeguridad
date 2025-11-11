@@ -3,9 +3,10 @@ package co.edu.uniquindio.poo.empresaseguridad.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Empresa {
-    /*private String nombre, nit;
+    private String nombre, nit;
     private List<AgendaItem> listItems;
     private List<Empleado> listEmpleados;
     private List<ServicioSeguridad> listServiciosSeguridad;
@@ -63,7 +64,7 @@ public class Empresa {
 
     public boolean agregarEquipo(Empleado equipo) {
         boolean centinela = false;
-        if (!verificarEquipo(equipo.getId())) {
+        if (!verificarEquipo(equipo.getDocumento())) {
             listEquipos.add(equipo);
             centinela = true;
         }
@@ -73,7 +74,7 @@ public class Empresa {
     public boolean verificarEquipo(String id) {
         boolean centinela = false;
         for (Empleado equipo : listEquipos) {
-            if (equipo.getId().equals(id)) {
+            if (equipo.getDocumento().equals(id)) {
                 centinela = true;
             }
         }
@@ -84,7 +85,7 @@ public class Empresa {
     public boolean eliminarEquipo(String id){
         boolean centinela = false;
         for (Empleado equipo: listEquipos) {
-            if (equipo.getId().equals(id)) {
+            if (equipo.getDocumento().equals(id)) {
                 // CORREGIDO: debe eliminar de listConsultas, NO de listMascotas
                 listEquipos.remove(equipo);
                 centinela = true;
@@ -104,7 +105,7 @@ public class Empresa {
 
     public boolean registrarVigilante(Empleado vigilante) {
         boolean centinela = false;
-        if (!verificarVigilante(vigilante.getId())) {
+        if (!verificarVigilante(vigilante.getDocumento())) {
             listEmpleados.add(vigilante);
             centinela = true;
         }
@@ -114,7 +115,7 @@ public class Empresa {
     public boolean verificarVigilante(String id) {
         boolean centinela = false;
         for (Empleado vigilante : listEmpleados) {
-            if (vigilante.getId().equals(id)) {
+            if (vigilante.getDocumento().equals(id)) {
                 centinela = true;
             }
         }
@@ -123,7 +124,7 @@ public class Empresa {
 
     public boolean registrarSupervisor(Empleado supervisor) {
         boolean centinela = false;
-        if (!verificarSupervisor(supervisor.getId())) {
+        if (!verificarSupervisor(supervisor.getDocumento())) {
             listEmpleados.add(supervisor);
             centinela = true;
         }
@@ -133,7 +134,7 @@ public class Empresa {
     public boolean verificarSupervisor(String id) {
         boolean centinela = false;
         for (Empleado supervisor : listEmpleados) {
-            if (supervisor.getId().equals(id)) {
+            if (supervisor.getDocumento().equals(id)) {
                 centinela = true;
             }
         }
@@ -142,7 +143,7 @@ public class Empresa {
 
     public boolean registrarOperador (Empleado operador) {
         boolean centinela = false;
-        if (!verificarOperador(operador.getId())) {
+        if (!verificarOperador(operador.getDocumento())) {
             listEmpleados.add(operador);
             centinela = true;
         }
@@ -152,7 +153,7 @@ public class Empresa {
     public boolean verificarOperador(String id) {
         boolean centinela = false;
         for (Empleado operador : listEmpleados) {
-            if (operador.getId().equals(id)) {
+            if (operador.getDocumento().equals(id)) {
                 centinela = true;
             }
         }
@@ -203,30 +204,108 @@ public class Empresa {
 
     //------------------------------------------------------------------------------------------------------------------------------
 
-    public void asignarPersonalAServicio(ServicioSeguridad servicio, Empleado empleado){
+    public void asignarPersonalAServicio(ServicioSeguridad servicio, Empleado empleado) {
+        if (servicio == null || empleado == null) {
+            throw new IllegalArgumentException("Servicio o empleado no pueden ser nulos");
+        }
 
+        servicio.asignarEmpleado(empleado); // Usa el método ya definido en ServicioSeguridad
+
+        registrarNovedad(new RegistroNovedad (
+                "Asignación de personal",
+                "Empleado " + empleado.getNombre() + " asignado al servicio " + servicio.getCodigoContrato(),
+                LocalDateTime.now()
+        ));
     }
 
     public double calcularCostoTotalServicios() {
-        return 0;
+        return listServiciosSeguridad.stream()
+                .filter(servicio -> servicio.getEstado().toString().equalsIgnoreCase("ACTIVO"))
+                .mapToDouble(ServicioSeguridad::calcularCostoMensual)
+                .sum();
     }
 
-    public String generarInformeDotacion(Empleado empleado){
-        return "";
+    public String generarInformeDotacion(Empleado empleado) {
+        if (empleado == null) return "Empleado no válido.";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Informe de Dotación - ").append(empleado.getNombre()).append("\n");
+        sb.append("-------------------------------------------------\n");
+
+        double total = 0;
+        for (Equipo equipo : empleado.getEquiposAsignados()) {
+            sb.append("Código: ").append(equipo.getCodigo())
+                    .append(" | Tipo: ").append(equipo.getTipo())
+                    .append(" | Estado: ").append(equipo.getEstado())
+                    .append(" | Valor: ").append(equipo.getValorReposicion()).append("\n");
+            total += equipo.getValorReposicion();
+        }
+
+        sb.append("-------------------------------------------------\n");
+        sb.append("Valor total de dotación: ").append(total);
+        return sb.toString();
     }
 
-    public double calcularGastoTotal(){
-        return 0;
+    public double calcularGastoTotal() {
+        double gastoNomina = listEmpleados.stream()
+                .mapToDouble(Empleado::calcularSalarioTotal)
+                .sum();
+
+        double gastoEquipos = listEquipos.stream()
+                .mapToDouble(Equipo::getValorReposicion)
+                .sum();
+
+        return gastoNomina + gastoEquipos;
     }
-    public void registrarNovedad(RegistroNovedad registroNovedad){
 
+    private List<RegistroNovedad> listNovedades = new ArrayList<>();
+
+    public void registrarNovedad(RegistroNovedad registroNovedad) {
+        if (registroNovedad != null) {
+            listNovedades.add(registroNovedad);
+        }
+    }
+
+    public List<RegistroNovedad> obtenerNovedades(LocalDateTime desde, LocalDateTime hasta) {
+        return listNovedades.stream()
+                .filter(n -> !n.fecha().isBefore(desde) && !n.fecha().isAfter(hasta))
+                .collect(Collectors.toList());
+    }
+
+    public List<ServicioSeguridad> obtenerServiciosActivos() {
+        return listServiciosSeguridad.stream()
+                .filter(s -> s.getEstado().toString().equalsIgnoreCase("ACTIVO"))
+                .collect(Collectors.toList());
+    }
+
+    public List<Empleado> obtenerEmpleadosSinAsignacion() {
+        return listEmpleados.stream()
+                .filter(emp -> listServiciosSeguridad.stream()
+                        .noneMatch(serv -> serv.getEmpleadosAsignados().contains(emp)))
+                .collect(Collectors.toList());
+    }
+
+    public List<Empleado> obtenerEmpleados() {
+        return listEmpleados;
+    }
+
+    public List<Empleado> obtenerEquiposDisponibles() {
+        List<Empleado> disponibles = new ArrayList<>();
+
+        for (Empleado equipo : listEquipos) {
+            boolean asignado = false;
+            for (Empleado empleado : listEmpleados) {
+                if (empleado.getEquiposAsignados().contains(equipo)) {
+                    asignado = true;
+                    break;
+                }
+            }
+            if (!asignado) {
+                disponibles.add(equipo);
+            }
+        }
+        return disponibles;
     }
 
 
-    public List<RegistroNovedad> obtenerNovedades(LocalDateTime desde, LocalDateTime hasta){
-        return null;
-    }
-
-
-*/
 }

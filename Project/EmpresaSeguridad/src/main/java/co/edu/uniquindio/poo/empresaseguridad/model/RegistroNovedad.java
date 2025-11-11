@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 
 public record RegistroNovedad(
         String id,
-        LocalDateTime fecha,
         String tipo,
-        String descripcion,
-        String responsable
-) {}
+        LocalDateTime fecha
+) {
+    public RegistroNovedad(String tipo, String descripcion) {
+        this(java.util.UUID.randomUUID().toString(), tipo, LocalDateTime.now());
+    }
+}

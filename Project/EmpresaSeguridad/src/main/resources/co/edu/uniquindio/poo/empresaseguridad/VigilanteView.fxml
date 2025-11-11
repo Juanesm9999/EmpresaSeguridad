@@ -6,6 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+
             fx:controller="co.edu.uniquindio.poo.empresaseguridad.viewController.VigilanteViewController">
 
     <top>
@@ -30,7 +31,7 @@
                 <TextField fx:id="txtDocumento" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200"/>
 
                 <Label text="Nombre:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                <TextField fx:id="txtnombre" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="200"/>
+                <TextField fx:id="txtNombre" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="200"/>
 
                 <Label text="Turno:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <ComboBox fx:id="cmbTurno" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>

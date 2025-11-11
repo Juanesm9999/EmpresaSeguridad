@@ -77,4 +77,5 @@ public abstract class ServicioSeguridad implements IAuditable, IAgendable {
     public void setEstado(EstadoServicio estado) { this.estado = estado; }
     public List<Empleado> getEmpleadosAsignados() { return empleadosAsignados; }
     public List<Equipo> getEquiposAsignados() { return equiposAsignados; }
+
 }

@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.empresaseguridad.model;
 
+import javafx.beans.value.ObservableValue;
+
 public class OperadorMonitoreo extends Empleado {
     private int numeroZonasMonitoreo;
 
@@ -15,6 +17,16 @@ public class OperadorMonitoreo extends Empleado {
         double valorHoraExtra = getSalarioBase() / 240 * 1.5;
         double bonoZonas = numeroZonasMonitoreo * 50000;
         return getSalarioBase() + (getHorasExtras() * valorHoraExtra) + bonoZonas;
+    }
+
+    @Override
+    public ObservableValue<String> turno() {
+        return null;
+    }
+
+    @Override
+    public ObservableValue<String> documento() {
+        return null;
     }
 
     // Getters y Setters
