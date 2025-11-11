@@ -3,68 +3,50 @@ package co.edu.uniquindio.poo.empresaseguridad.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Empleado implements IAgendable {
-    
-    protected String nombre, id;
-    protected boolean isDia;
-    protected int salarioBase;
+public abstract class Empleado {
+    private String documento;
+    private String nombre;
+    private Turno turno;
+    private double salarioBase;
+    private double horasExtras;
+    private List<Equipo> equiposAsignados;
 
-    private List<Equipo> listEquipos;
-
-
-    public Empleado(String nombre, String id, boolean isDia, int salarioBase) {
+    public Empleado(String documento, String nombre, Turno turno,
+                    double salarioBase, double horasExtras) {
+        this.documento = documento;
         this.nombre = nombre;
-        this.id = id;
-        this.isDia = isDia;
+        this.turno = turno;
         this.salarioBase = salarioBase;
-        this.listEquipos = new ArrayList<Equipo>();
+        this.horasExtras = horasExtras;
+        this.equiposAsignados = new ArrayList<>();
     }
 
-    public String getNombre() {
-        return nombre;
+    public abstract double calcularSalarioTotal();
+
+    public void asignarEquipo(Equipo equipo) {
+        equiposAsignados.add(equipo);
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void retirarEquipo(Equipo equipo) {
+        equiposAsignados.remove(equipo);
     }
 
-    public String getId() {
-        return id;
+    public double calcularValorTotalEquipos() {
+        return equiposAsignados.stream()
+                .mapToDouble(Equipo::getValorReposicion)
+                .sum();
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public boolean isDia() {
-        return isDia;
-    }
-
-    public void setDia(boolean dia) {
-        isDia = dia;
-    }
-
-    public int getSalarioBase() {
-        return salarioBase;
-    }
-
-    public void setSalarioBase(int salarioBase) {
-        this.salarioBase = salarioBase;
-    }
-
-    public List<Equipo> getListEquipos() {
-        return listEquipos;
-    }
-
-    public void setListEquipos(List<Equipo> listEquipos) {
-        this.listEquipos = listEquipos;
-    }
-
-    public int calcularSalarioTotal() {
-        return 0;
-    }
-
-    public void calcularValorEquipos(){
-
-    }
+    // Getters y Setters
+    public String getDocumento() { return documento; }
+    public void setDocumento(String documento) { this.documento = documento; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public Turno getTurno() { return turno; }
+    public void setTurno(Turno turno) { this.turno = turno; }
+    public double getSalarioBase() { return salarioBase; }
+    public void setSalarioBase(double salarioBase) { this.salarioBase = salarioBase; }
+    public double getHorasExtras() { return horasExtras; }
+    public void setHorasExtras(double horasExtras) { this.horasExtras = horasExtras; }
+    public List<Equipo> getEquiposAsignados() { return equiposAsignados; }
 }

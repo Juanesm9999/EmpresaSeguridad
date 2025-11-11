@@ -1,26 +1,30 @@
 package co.edu.uniquindio.poo.empresaseguridad.model;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustodiaFija extends ServicioSeguridad {
+    private List<Vigilante> vigilantesAsignados;
 
-    public CustodiaFija(String codigoContrato, String id, int tarifaMensual, EstadoServicio estadoServicio) {
-        super(codigoContrato, id, tarifaMensual, estadoServicio);
-    }
-
-    public void asignarVigilantePuestoPermanente(){
-        
-    }
-
-
-    @Override
-    public void Programar(LocalDate fecha, String id) {
-
+    public CustodiaFija(String codigoContrato, String cliente,
+                        double tarifaMensual, EstadoServicio estado) {
+        super(codigoContrato, cliente, tarifaMensual, estado);
+        this.vigilantesAsignados = new ArrayList<>();
     }
 
     @Override
-    public List<AgendaItem> ObtenerAgenda(LocalDate desde, LocalDate hasta) {
-        return List.of();
+    public double calcularCostoMensual() {
+        double costoBase = getTarifaMensual();
+        double costoVigilantes = vigilantesAsignados.size() * 500000;
+        return costoBase + costoVigilantes;
+    }
+
+    public void asignarVigilante(Vigilante vigilante) {
+        vigilantesAsignados.add(vigilante);
+        asignarEmpleado(vigilante);
+    }
+
+    public List<Vigilante> getVigilantesAsignados() {
+        return vigilantesAsignados;
     }
 }

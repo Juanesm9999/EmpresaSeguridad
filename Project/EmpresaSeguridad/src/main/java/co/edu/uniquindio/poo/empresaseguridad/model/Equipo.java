@@ -1,55 +1,28 @@
 package co.edu.uniquindio.poo.empresaseguridad.model;
 
 public class Equipo {
-    private String id;
-    private String valorReposicion;
-    private TipoEquipo tipoEquipo;
-    private EstadoEquipo estadoEquipo;
+    private String codigo;
+    private TipoEquipo tipo;
+    private EstadoEquipo estado;
+    private double valorReposicion;
 
-    public Equipo(){
-        this.id = id;
-        this.valorReposicion = valorReposicion;
-        this.tipoEquipo = tipoEquipo;
-
-    }
-
-
-    //-------------------------------getters y setters------------------------------------------
-
-
-    public String getIdo() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getValorReposicion() {
-        return valorReposicion;
-    }
-
-    public void setValorReposicion(String valorReposicion) {
+    public Equipo(String codigo, TipoEquipo tipo, EstadoEquipo estado,
+                  double valorReposicion) {
+        this.codigo = codigo;
+        this.tipo = tipo;
+        this.estado = estado;
         this.valorReposicion = valorReposicion;
     }
 
-    public TipoEquipo getTipoEquipo() {
-        return tipoEquipo;
-    }
-
-    public void setTipoEquipo(TipoEquipo tipoEquipo) {
-        this.tipoEquipo = tipoEquipo;
-    }
-
-    public EstadoEquipo getEstadoEquipo() {
-        return estadoEquipo;
-    }
-
-    public void setEstadoEquipo(EstadoEquipo estadoEquipo) {
-        this.estadoEquipo = estadoEquipo;
-    }
-
-    public String getId() {
-        return id;
+    // Getters y Setters
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo; }
+    public TipoEquipo getTipo() { return tipo; }
+    public void setTipo(TipoEquipo tipo) { this.tipo = tipo; }
+    public EstadoEquipo getEstado() { return estado; }
+    public void setEstado(EstadoEquipo estado) { this.estado = estado; }
+    public double getValorReposicion() { return valorReposicion; }
+    public void setValorReposicion(double valorReposicion) {
+        this.valorReposicion = valorReposicion;
     }
 }

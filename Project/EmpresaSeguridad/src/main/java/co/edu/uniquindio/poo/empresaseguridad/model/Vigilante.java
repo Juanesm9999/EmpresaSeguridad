@@ -1,22 +1,26 @@
 package co.edu.uniquindio.poo.empresaseguridad.model;
 
-import java.time.LocalDate;
-import java.util.List;
-
 public class Vigilante extends Empleado {
+    private String numeroPuesto;
+    private TipoArma tipoArma;
 
-    public Vigilante(String nombre, String id, boolean isDia, int salarioBase) {
-        super(nombre, id, isDia, salarioBase);
+    public Vigilante(String documento, String nombre, Turno turno,
+                     double salarioBase, double horasExtras,
+                     String numeroPuesto, TipoArma tipoArma) {
+        super(documento, nombre, turno, salarioBase, horasExtras);
+        this.numeroPuesto = numeroPuesto;
+        this.tipoArma = tipoArma;
     }
-
 
     @Override
-    public void Programar(LocalDate fecha, String id) {
-
+    public double calcularSalarioTotal() {
+        double valorHoraExtra = getSalarioBase() / 240 * 1.5;
+        return getSalarioBase() + (getHorasExtras() * valorHoraExtra);
     }
 
-    @Override
-    public List<AgendaItem> ObtenerAgenda(LocalDate desde, LocalDate hasta) {
-        return List.of();
-    }
+    // Getters y Setters
+    public String getNumeroPuesto() { return numeroPuesto; }
+    public void setNumeroPuesto(String numeroPuesto) { this.numeroPuesto = numeroPuesto; }
+    public TipoArma getTipoArma() { return tipoArma; }
+    public void setTipoArma(TipoArma tipoArma) { this.tipoArma = tipoArma; }
 }

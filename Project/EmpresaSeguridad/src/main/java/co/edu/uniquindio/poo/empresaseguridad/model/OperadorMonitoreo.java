@@ -1,32 +1,25 @@
 package co.edu.uniquindio.poo.empresaseguridad.model;
 
-import java.time.LocalDate;
-import java.util.List;
+public class OperadorMonitoreo extends Empleado {
+    private int numeroZonasMonitoreo;
 
-public class OperadorMonitoreo extends Empleado{
-
-    private int numZonas;
-
-    public OperadorMonitoreo(String nombre, String id, boolean isDia, int salarioBase, int numZonas) {
-        super(nombre, id, isDia, salarioBase);
-        this.numZonas = numZonas;
-    }
-
-    public int getNumZonas() {
-        return numZonas;
-    }
-
-    public void setNumZonas(int numZonas) {
-        this.numZonas = numZonas;
+    public OperadorMonitoreo(String documento, String nombre, Turno turno,
+                             double salarioBase, double horasExtras,
+                             int numeroZonasMonitoreo) {
+        super(documento, nombre, turno, salarioBase, horasExtras);
+        this.numeroZonasMonitoreo = numeroZonasMonitoreo;
     }
 
     @Override
-    public void Programar(LocalDate fecha, String id) {
-
+    public double calcularSalarioTotal() {
+        double valorHoraExtra = getSalarioBase() / 240 * 1.5;
+        double bonoZonas = numeroZonasMonitoreo * 50000;
+        return getSalarioBase() + (getHorasExtras() * valorHoraExtra) + bonoZonas;
     }
 
-    @Override
-    public List<AgendaItem> ObtenerAgenda(LocalDate desde, LocalDate hasta) {
-        return List.of();
+    // Getters y Setters
+    public int getNumeroZonasMonitoreo() { return numeroZonasMonitoreo; }
+    public void setNumeroZonasMonitoreo(int numeroZonasMonitoreo) {
+        this.numeroZonasMonitoreo = numeroZonasMonitoreo;
     }
 }

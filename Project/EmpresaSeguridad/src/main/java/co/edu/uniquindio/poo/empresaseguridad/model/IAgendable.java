@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IAgendable {
-    void Programar(LocalDate fecha,String id);
-    List<AgendaItem> ObtenerAgenda(LocalDate desde, LocalDate hasta);
-
+    void programar(LocalDate fecha, String descripcion);
+    List<AgendaItem> obtenerAgenda(LocalDate desde, LocalDate hasta);
 }

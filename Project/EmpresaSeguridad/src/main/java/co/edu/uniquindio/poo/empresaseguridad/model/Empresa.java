@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Empresa {
-
-    private String nombre, nit;
+    /*private String nombre, nit;
     private List<AgendaItem> listItems;
     private List<Empleado> listEmpleados;
     private List<ServicioSeguridad> listServiciosSeguridad;
@@ -229,5 +228,5 @@ public class Empresa {
     }
 
 
-
+*/
 }
