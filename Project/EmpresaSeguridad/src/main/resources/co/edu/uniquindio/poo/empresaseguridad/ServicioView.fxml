@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.empresaseguridad.viewController.ServicioViewController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Título -->
+    <HBox alignment="CENTER">
+        <Label text="Gestión de Servicios de Seguridad" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Formulario de datos -->
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints minWidth="140" prefWidth="140"/>
+            <ColumnConstraints minWidth="230" prefWidth="230"/>
+        </columnConstraints>
+
+        <!-- Campos básicos -->
+        <Label text="Código Contrato:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtCodigoContrato" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="Ingrese código"/>
+
+        <Label text="Cliente:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtCliente" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Ingrese nombre del cliente"/>
+
+        <Label text="Tarifa Mensual:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtTarifaMensual" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="Ingrese tarifa"/>
+
+        <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="cmbEstado" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="230" promptText="Seleccione estado"/>
+
+        <Label text="Tipo de Servicio:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="cmbTipoServicio" GridPane.columnIndex="1" GridPane.rowIndex="4" prefWidth="230" promptText="Seleccione tipo"/>
+
+        <!-- Campos específicos -->
+        <Separator GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+
+        <Label text="Número Vigilantes:" GridPane.columnIndex="0" GridPane.rowIndex="6" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtNumeroVigilantes" GridPane.columnIndex="1" GridPane.rowIndex="6" promptText="Solo para Custodia Fija" disable="true"/>
+
+        <Label text="Número Rutas:" GridPane.columnIndex="0" GridPane.rowIndex="7" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtNumeroRutas" GridPane.columnIndex="1" GridPane.rowIndex="7" promptText="Solo para Patrullaje" disable="true"/>
+
+        <Label text="Kilómetros:" GridPane.columnIndex="0" GridPane.rowIndex="8" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtKilometros" GridPane.columnIndex="1" GridPane.rowIndex="8" promptText="Solo para Patrullaje" disable="true"/>
+
+        <Label text="Número Dispositivos:" GridPane.columnIndex="0" GridPane.rowIndex="9" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtNumeroDispositivos" GridPane.columnIndex="1" GridPane.rowIndex="9" promptText="Solo para Monitoreo" disable="true"/>
+    </GridPane>
+
+    <!-- Botones de acción -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="btnAgregar" text="Agregar" onAction="#onAgregar"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar"
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminar"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiar"
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnAsignarPersonal" text="Asignar Personal" onAction="#onAsignarPersonal"
+                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="130"/>
+        <Button fx:id="btnAsignarEquipo" text="Asignar Equipo" onAction="#onAsignarEquipo"
+                style="-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="130"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Tabla de servicios -->
+    <VBox VBox.vgrow="ALWAYS">
+        <Label text="Lista de Servicios" style="-fx-font-size: 16px; -fx-font-weight: bold;">
+            <padding>
+                <Insets bottom="5"/>
+            </padding>
+        </Label>
+
+        <TableView fx:id="tblServicios" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="tbcCodigo" text="Código" prefWidth="120"/>
+                <TableColumn fx:id="tbcCliente" text="Cliente" prefWidth="180"/>
+                <TableColumn fx:id="tbcTarifa" text="Tarifa" prefWidth="100"/>
+                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="100"/>
+                <TableColumn fx:id="tbcTipo" text="Tipo" prefWidth="150"/>
+                <TableColumn fx:id="tbcCostoTotal" text="Costo Total" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+    <!-- Botón regresar -->
+    <HBox alignment="CENTER_RIGHT">
+        <Button fx:id="btnRegresar" text="Regresar" onAction="#onRegresar"
+                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+    </HBox>
+</VBox>

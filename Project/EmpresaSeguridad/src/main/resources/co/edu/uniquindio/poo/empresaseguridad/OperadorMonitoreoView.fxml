@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.empresaseguridad.viewController.OperadorMonitoreoViewController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Título -->
+    <HBox alignment="CENTER">
+        <Label text="Gestión de Operadores de Monitoreo" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Formulario de datos -->
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints minWidth="120" prefWidth="120"/>
+            <ColumnConstraints minWidth="250" prefWidth="250"/>
+        </columnConstraints>
+
+        <Label text="Documento:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtDocumento" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="Ingrese documento"/>
+
+        <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="Ingrese nombre completo"/>
+
+        <Label text="Turno:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="cmbTurno" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="250" promptText="Seleccione turno"/>
+
+        <Label text="Salario Base:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtSalarioBase" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="Ingrese salario base"/>
+
+        <Label text="Horas Extras:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtHorasExtras" GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="Ingrese horas extras"/>
+
+        <Label text="Número de Zonas:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtNumeroZonas" GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="Ingrese número de zonas"/>
+    </GridPane>
+
+    <!-- Botones de acción -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="btnAgregar" text="Agregar" onAction="#onAgregar"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar"
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminar"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiar"
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Tabla de operadores -->
+    <VBox VBox.vgrow="ALWAYS">
+        <Label text="Lista de Operadores de Monitoreo" style="-fx-font-size: 16px; -fx-font-weight: bold;">
+            <padding>
+                <Insets bottom="5"/>
+            </padding>
+        </Label>
+
+        <TableView fx:id="tblOperadores" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="tbcDocumento" text="Documento" prefWidth="120"/>
+                <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="180"/>
+                <TableColumn fx:id="tbcTurno" text="Turno" prefWidth="100"/>
+                <TableColumn fx:id="tbcSalarioBase" text="Salario Base" prefWidth="120"/>
+                <TableColumn fx:id="tbcZonas" text="Zonas" prefWidth="80"/>
+                <TableColumn fx:id="tbcSalarioTotal" text="Salario Total" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+    <!-- Botón regresar -->
+    <HBox alignment="CENTER_RIGHT">
+        <Button fx:id="btnRegresar" text="Regresar" onAction="#onRegresar"
+                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+    </HBox>
+</VBox>

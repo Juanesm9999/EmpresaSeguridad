@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.empresaseguridad.viewController.EquipoViewController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Título -->
+    <HBox alignment="CENTER">
+        <Label text="Gestión de Equipos" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Formulario de datos -->
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints minWidth="120" prefWidth="120"/>
+            <ColumnConstraints minWidth="250" prefWidth="250"/>
+        </columnConstraints>
+
+        <Label text="Código:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtCodigo" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="Ingrese código del equipo"/>
+
+        <Label text="Tipo:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="cmbTipo" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="250" promptText="Seleccione tipo"/>
+
+        <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="cmbEstado" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="250" promptText="Seleccione estado"/>
+
+        <Label text="Valor Reposición:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="txtValorReposicion" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="Ingrese valor"/>
+    </GridPane>
+
+    <!-- Botones de acción -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="btnAgregar" text="Agregar" onAction="#onAgregar"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar"
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminar"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiar"
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+        <Button fx:id="btnAsignarEmpleado" text="Asignar a Empleado" onAction="#onAsignarEmpleado"
+                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="150"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Tabla de equipos -->
+    <VBox VBox.vgrow="ALWAYS">
+        <Label text="Lista de Equipos" style="-fx-font-size: 16px; -fx-font-weight: bold;">
+            <padding>
+                <Insets bottom="5"/>
+            </padding>
+        </Label>
+
+        <TableView fx:id="tblEquipos" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="tbcCodigo" text="Código" prefWidth="150"/>
+                <TableColumn fx:id="tbcTipo" text="Tipo" prefWidth="150"/>
+                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="120"/>
+                <TableColumn fx:id="tbcValor" text="Valor Reposición" prefWidth="150"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+    <!-- Botón regresar -->
+    <HBox alignment="CENTER_RIGHT">
+        <Button fx:id="btnRegresar" text="Regresar" onAction="#onRegresar"
+                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-weight: bold;"
+                prefWidth="100"/>
+    </HBox>
+</VBox>
